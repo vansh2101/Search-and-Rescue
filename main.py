@@ -41,8 +41,7 @@ mask_res = cv2.add(mask_brown, mask_green)
 huts = cv2.bitwise_and(img, img, mask=cv2.bitwise_not(mask_res))
 
 #? Adding all the images to get the resultant image
-res = cv2.add(res_brown, res_green)
-img_res = cv2.add(res, huts)
+img_res = res_green + res_brown + huts
 
 
 #? Displaying the image
