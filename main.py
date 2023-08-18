@@ -27,16 +27,27 @@ mask_green = cv2.inRange(hsv, lower_green, upper_green)
 res_green = cv2.bitwise_and(img, img, mask=mask_green)
 
 
-# res = cv2.add(res_brown, res_green)
+#? Converting the brown color to blue
+res_brown[mask_brown > 0] = (0, 255, 255)
+
+#? Converting the green color to yellow
+res_green[mask_green > 0] = (255, 255, 0)
+
+
+#? Adding the two masks
+mask_res = cv2.add(mask_brown, mask_green)
+
+#? Separating the triangles from the image
+huts = cv2.bitwise_and(img, img, mask=cv2.bitwise_not(mask_res))
+
+#? Adding all the images to get the resultant image
+res = cv2.add(res_brown, res_green)
+img_res = cv2.add(res, huts)
 
 
 #? Displaying the image
 cv2.imshow('image', img)
-# cv2.imshow('res', res)
-# cv2.imshow('mask_brown', mask_brown)
-cv2.imshow('res_brown', res_brown)
-# cv2.imshow('mask_green', mask_green)
-cv2.imshow('res_green', res_green)
+cv2.imshow('res', img_res)
 
 
 cv2.waitKey(0)
