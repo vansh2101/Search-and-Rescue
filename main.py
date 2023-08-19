@@ -150,7 +150,30 @@ for image in images:
 
 
 
+#* Sorting the images according to the priority ratio
+def sorting_img(l):
+    #? Making a copy of the lists
+    copy_ratio = l
+    copy_img = images
+
+    res = []
+
+    #? Running a loop to sort the images
+    while len(copy_ratio) != 0:
+        ind = copy_ratio.index(max(copy_ratio))
+
+        res.append(copy_img[ind])
+
+        copy_img.pop(ind)
+        copy_ratio.pop(ind)
+
+
+    return res
+
+
+
 #* Printing the results
 print('n_houses:', number_of_houses)
 print('priority_houses:', priority_of_houses)
 print('priority_ratio:', ratio_of_priority)
+print('image_by_rescue_ratio:', sorting_img(ratio_of_priority))
